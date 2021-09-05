@@ -15,9 +15,24 @@ $ ./mvnw spring-boot:run
 ```
 ## API
 ### Add values to pool
-URL: /add
-Method: POST
-Content-Type: application/json
+- URL: /add
+- Method: POST
+- Content-Type: application/json
+- Request body:  
+
+
+|name|type|default|description|
+|----|----|-------|----------|
+|pooId|long| |0<poolId<99999 and not null|
+|values|long[]| |0<array_item<99999 and not null|
+
+- Response body:  
+
+name|type|default|description|
+----|----|-------|----------|
+action|string| |```INSERTED``` when poolId is not exists otherwise ```APPENDED```|
+
+
 
 Sample request:
 ```
@@ -37,6 +52,22 @@ Sample response:
 URL: /query
 Method: POST
 Content-Type: application/json
+
+Request body:  
+
+
+name|type|default|description
+----|----|-------|----------|
+pooId|long||0<poolId<99999 and not null
+percentile|float||not null
+
+Response body:  
+
+
+name|type|default|description
+----|----|-------|----------|
+count|long||```INSERTED``` when poolId is not exists otherwise ```APPENDED```
+result|long||quantile value on input percentile
 
 Sample request:
 ```

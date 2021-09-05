@@ -1,4 +1,7 @@
 # homework
+- Insert/append set of long values to pool by id
+- Query values quantile by pool id
+
 Start project:
 ```
 $ ./mvnw spring-boot:run
@@ -14,7 +17,7 @@ Sample request:
 $ curl --location --request POST 'localhost:8080/add' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "poolId": 2,
+    "poolId": 2, 
     "values": [3, 6, 7, 8, 8, 10, 13, 15, 16, 20]
 }'
 ```

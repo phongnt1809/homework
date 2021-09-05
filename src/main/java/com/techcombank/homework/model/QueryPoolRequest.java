@@ -1,5 +1,6 @@
 package com.techcombank.homework.model;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import lombok.Setter;
 public class QueryPoolRequest {
 
   @NotNull
-  @Positive
+  @Digits(fraction = 0, integer = 5)
   public Long poolId;
 
   @NotNull

@@ -53,9 +53,14 @@ public class PoolServiceImpl implements PoolService{
             String data = scanner.nextLine();
             PoolCommand cmd = objectMapper.readValue(data, PoolCommand.class);
             log.info(data);
-            if (cmd.cmd == POOL_COMMAND.ADD) {
-              repository.addToPool(cmd.id, cmd.values);
+            try {
+              if (cmd.cmd == POOL_COMMAND.ADD) {
+                repository.addToPool(cmd.id, cmd.values);
+              }
+            } catch (Exception e) {
+              //ignore invalid command
             }
+
           }
           scanner.close();
 

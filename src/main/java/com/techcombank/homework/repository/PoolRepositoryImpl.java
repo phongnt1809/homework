@@ -1,6 +1,7 @@
 package com.techcombank.homework.repository;
 
 
+import com.techcombank.homework.exception.InvalidPoolId;
 import com.techcombank.homework.model.ACTION;
 import com.techcombank.homework.model.CalculatedQuantileResult;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class PoolRepositoryImpl implements PoolRepository {
    * - p: percentiles
    * */
   @Override
-  public CalculatedQuantileResult query(Long poolId, float percentile) {
+  public CalculatedQuantileResult query(Long poolId, float percentile) throws InvalidPoolId {
     SortedArrayList values = poolHashTable.get(poolId);
     if (values != null) {
       int n = values.size();
@@ -72,7 +73,7 @@ public class PoolRepositoryImpl implements PoolRepository {
         return new CalculatedQuantileResult(n, values.get(i-1));
       }
     }
-    return null;
+    throw new InvalidPoolId();
   }
 }
 

@@ -1,6 +1,7 @@
 package com.techcombank.homework.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techcombank.homework.exception.InvalidPoolId;
 import com.techcombank.homework.model.ACTION;
 import com.techcombank.homework.model.CalculatedQuantileResult;
 import com.techcombank.homework.repository.PoolRepository;
@@ -76,7 +77,7 @@ public class PoolServiceImpl implements PoolService{
   }
 
   @Override
-  public CalculatedQuantileResult query(Long poolId, float percentile) {
+  public CalculatedQuantileResult query(Long poolId, float percentile) throws InvalidPoolId {
     return repository.query(poolId, percentile);
   }
 

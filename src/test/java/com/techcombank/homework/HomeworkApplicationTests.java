@@ -44,11 +44,21 @@ class HomeworkApplicationTests {
 			throws Exception {
     mvc.perform(
             post("/add")
-                .content(asJsonString(new AddValuesRequest(EVEN_SIZED_POOL_ID, new ArrayList<> (Arrays.asList(3L, 6L, 7L, 8L, 8L, 10L, 13L, 15L, 16L, 20L)))))
+                .content(asJsonString(new AddValuesRequest(EVEN_SIZED_POOL_ID, new ArrayList<> (Arrays.asList(13L, 15L, 16L, 20L)))))
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.action", is("INSERTED")));
+
+    mvc.perform(
+            post("/add")
+                .content(asJsonString(new AddValuesRequest(EVEN_SIZED_POOL_ID, new ArrayList<> (Arrays.asList(3L, 6L, 7L, 8L, 8L, 10L)))))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.action", is("APPENDED")));
+
+
 	}
 
 	@Test
@@ -110,11 +120,21 @@ class HomeworkApplicationTests {
 			throws Exception {
     mvc.perform(
             post("/add")
-                .content(asJsonString(new AddValuesRequest(ODD_SIZED_POOL_ID, new ArrayList<> (Arrays.asList(3L, 6L, 7L, 8L, 8L, 9L, 10L, 13L, 15L, 16L, 20L)))))
+                .content(asJsonString(new AddValuesRequest(ODD_SIZED_POOL_ID, new ArrayList<> (Arrays.asList(3L, 6L, 7L, 15L, 16L, 20L)))))
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.action", is("INSERTED")));
+
+    mvc.perform(
+            post("/add")
+                .content(asJsonString(new AddValuesRequest(ODD_SIZED_POOL_ID, new ArrayList<> (Arrays.asList(8L, 8L, 9L, 10L, 13L)))))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.action", is("APPENDED")));
+
+
 	}
 
 	@Test
@@ -170,6 +190,15 @@ class HomeworkApplicationTests {
 
 	}
 
+	@Test
+	@Order(3)
+	public void invalidPoolId_thenStatus400() throws Exception {
+		mvc.perform(
+				post("/query")
+						.content(asJsonString(new QueryPoolRequest(22222L, 100F)))
+						.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isBadRequest());
+	}
 
 
 	public static String asJsonString(final Object obj) {

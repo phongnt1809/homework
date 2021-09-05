@@ -2,6 +2,13 @@
 - Insert/append set of long values to pool by id
 - Query values quantile by pool id
 
+## Configuration
+name|type|default|description
+----|----|-------|----------|
+persistence.enable|boolean|false|If ```true```, all 'add' operation will be write to ```persistence``` file. Application will try to recover pool values via this file.
+
+
+## Commands
 Start project:
 ```
 $ ./mvnw spring-boot:run

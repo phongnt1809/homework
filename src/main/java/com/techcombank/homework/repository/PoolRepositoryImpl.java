@@ -6,6 +6,7 @@ import com.techcombank.homework.model.CalculatedQuantileResult;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 
